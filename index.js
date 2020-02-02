@@ -7,6 +7,7 @@ const app=express()
 
 app.set('view engine','ejs')
 app.set('views',path.join(__dirname,'views'))
+app.use(express.urlencoded({extended:true}))
 
 var contactsList=[
     {
@@ -23,6 +24,12 @@ app.get('/',function(req,res){
     res.render('index',{
         contact_list:contactsList
     })
+})
+
+app.post('/create-contact',function(req,res){
+    // console.log(req.body)
+    contactsList.push(req.body)
+    res.redirect('back')
 })
 
 app.listen(port,function(err){
