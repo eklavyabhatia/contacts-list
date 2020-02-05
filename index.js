@@ -1,7 +1,8 @@
 const express = require('express')
 const path = require('path')
-
 const port = 8080
+
+const db=require('./config/mongoose')
 
 const app = express()
 
