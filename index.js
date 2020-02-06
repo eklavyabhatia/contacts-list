@@ -31,8 +31,16 @@ app.get('/', function (req, res) {
 
 app.post('/create-contact', function (req, res) {
     // console.log(req.body)
-    contactsList.push(req.body)
-    res.redirect('back')
+    Contact.create({
+        name: req.body.name,
+        phone: req.body.phone
+    }, function (err, newContact) {
+        if (err) {
+            console.log(err)
+            return
+        }
+        return res.redirect('back')
+    })
 })
 
 app.get('/delete-contact/:phone', function (req, res) {
