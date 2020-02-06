@@ -24,9 +24,16 @@ var contactsList = [
 ]
 
 app.get('/', function (req, res) {
-    res.render('index', {
-        contact_list: contactsList
+    Contact.find({}, function (err, contacts) {
+        if (err) {
+            console.log(err)
+            return;
+        }
+        res.render('index', {
+            contact_list: contacts
+        })
     })
+
 })
 
 app.post('/create-contact', function (req, res) {
