@@ -50,12 +50,16 @@ app.post('/create-contact', function (req, res) {
     })
 })
 
-app.get('/delete-contact/:phone', function (req, res) {
-    let phone = req.params.phone
-    let i = contactsList.findIndex(contacts => contacts.phone == phone)
-    if (i != -1)
-        contactsList.splice(i, 1);
-    res.redirect('back')
+app.get('/delete-contact/:id', function (req, res) {
+    let id = req.params.id
+    Contact.findByIdAndDelete(id, function (err) {
+        if (err) {
+            console.log(err)
+            return;
+        }
+
+        res.redirect('back')
+    })
 })
 
 app.listen(port, function (err) {
